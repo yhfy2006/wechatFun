@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from wxpy import *
 import re
-bot = Bot()
-my_friend = bot.friends()
+
 
 # 0 = AUTOREPLAY
 # 1 = Identity
@@ -10,6 +9,20 @@ my_friend = bot.friends()
 mode = 0
 
 tuling = Tuling('fb37998bdc04e7e2d2aa8c9395ecf142')
+
+
+def call_back_test(uuid, status, qrcode):
+    print (uuid)
+
+
+
+bot = Bot(qr_callback=call_back_test)
+my_friend = bot.friends()
+
+
+
+
+
 
 # Receive message automatically
 @bot.register()
