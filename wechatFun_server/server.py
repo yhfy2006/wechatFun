@@ -1,6 +1,8 @@
 import io
-from flask import Flask, send_file
-from wxpy import Bot
+from flask import Flask, send_file, request, abort
+from superBot import SuperBotTread
+import os.path
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -9,13 +11,24 @@ def hello():
 
 @app.route("/newbot")
 def newBot():
-    bot = Bot(qr_path = 'static/qr.png',qr_callback=qr_callback)
-    with open("static/qr.png", 'rb') as bites:
-        return send_file(
-            io.BytesIO(bites.read()),
-            attachment_filename='logo.jpeg',
-            mimetype='image/jpg'
-        )
+    bot = SuperBotTread()
+    bot.start()
+    return bot.threadID
+
+
+@app.route("/qr/<botid>")
+def returnQRImg(botid):
+    imgName = 'static/'+botid+'.png'
+    if os.path.isfile(imgName):
+        return send_file(imgName, mimetype='image/png')
+    else:
+        abort(404)
+
+
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return 'User %s' % username
 
 def qr_callback(uuid, status, qrcode):
     # with open("static/qr.png", 'rb') as bites:
