@@ -1,2 +1,6 @@
 
 .idea/*
+
+wechatFun_server/.idea/*
+
+*.pyc

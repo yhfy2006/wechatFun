@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -33,8 +34,9 @@ class ViewController: UIViewController {
         Alamofire.request("http://127.0.0.1:5000/newbot").responseString { (response) in
             let botId = response.result.value
             if let botId = botId{
-                self.botIdText.text = botId;
+                self.botIdText.text = botId
                 self.botid = botId
+                UserDefaults.standard.set(botId, forKey: "botid")
                 
                 Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timerh) in
                     self.fetchImage(timer: timerh)
@@ -56,11 +58,31 @@ class ViewController: UIViewController {
                 // Do stuff with your image
                 self.qrCodeImg.image = image;
                 timer.invalidate()
+                
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timerh) in
+                    self.fetchBotStatus(timer: timerh)
+                })
             }
         }
     }
     
+    func fetchBotStatus(timer:Timer){
+        let requestUrl = "http://127.0.0.1:5000/loginstatus/" + self.botid!
+        Alamofire.request(requestUrl).responseString { response in
+            if let botId = response.result.value{
+                if botId == "2"
+                {
+                    timer.invalidate()
+                    self.loginSuccess()
+                }
+            }
+            return
+        }
+    }
     
+    func loginSuccess() {
+        performSegue(withIdentifier: "loginSuccess", sender: self)
+    }
     
     
 }

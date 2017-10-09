@@ -1,6 +1,7 @@
 import io
 from flask import Flask, send_file, request, abort
 from superBot import SuperBotTread
+from superBot import BotPool
 import os.path
 
 app = Flask(__name__)
@@ -23,6 +24,13 @@ def returnQRImg(botid):
         return send_file(imgName, mimetype='image/png')
     else:
         abort(404)
+
+@app.route('/loginstatus/<botid>')
+def returnLoginStatus(botid):
+    bot = BotPool().shared.getBotThread(botid)
+    if bot is not None:
+        return str(bot.status.value)
+    abort(404)
 
 
 @app.route('/user/<username>')

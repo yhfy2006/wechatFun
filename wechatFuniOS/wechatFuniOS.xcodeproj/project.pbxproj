@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		459A88531F89998000AC7B1A /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A88521F89998000AC7B1A /* ConfigViewController.swift */; };
 		96E160B9B1984AA64BE3DBDA /* Pods_wechatFuniOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD86E3B242DEC4EEDD2A98A /* Pods_wechatFuniOS.framework */; };
 		FC57D9001F881D1A002CDF54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC57D8FF1F881D1A002CDF54 /* AppDelegate.swift */; };
 		FC57D9021F881D1A002CDF54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC57D9011F881D1A002CDF54 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		1F7CF208282D75AF9BB98C9A /* Pods-wechatFuniOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wechatFuniOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-wechatFuniOS/Pods-wechatFuniOS.release.xcconfig"; sourceTree = "<group>"; };
+		459A88521F89998000AC7B1A /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
 		9532E3CE74BAD27710915F86 /* Pods-wechatFuniOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wechatFuniOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-wechatFuniOS/Pods-wechatFuniOS.debug.xcconfig"; sourceTree = "<group>"; };
 		EBD86E3B242DEC4EEDD2A98A /* Pods_wechatFuniOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_wechatFuniOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC57D8FC1F881D1A002CDF54 /* wechatFuniOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wechatFuniOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +125,7 @@
 			children = (
 				FC57D8FF1F881D1A002CDF54 /* AppDelegate.swift */,
 				FC57D9011F881D1A002CDF54 /* ViewController.swift */,
+				459A88521F89998000AC7B1A /* ConfigViewController.swift */,
 				FC57D9031F881D1A002CDF54 /* Main.storyboard */,
 				FC57D9061F881D1A002CDF54 /* Assets.xcassets */,
 				FC57D9081F881D1A002CDF54 /* LaunchScreen.storyboard */,
@@ -346,6 +349,7 @@
 			files = (
 				FC57D9021F881D1A002CDF54 /* ViewController.swift in Sources */,
 				FC57D9001F881D1A002CDF54 /* AppDelegate.swift in Sources */,
+				459A88531F89998000AC7B1A /* ConfigViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
