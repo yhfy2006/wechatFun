@@ -38,6 +38,13 @@ def show_user_profile(username):
     # show the user profile for that user
     return 'User %s' % username
 
+@app.route('/chat/autoReply/<botid>')
+def setAutoReplyMessage(botid):
+    bot = BotPool().shared.getBotThread(botid)
+    if bot is not None:
+        return str(bot.status.value)
+    abort(404)
+
 def qr_callback(uuid, status, qrcode):
     # with open("static/qr.png", 'rb') as bites:
     #     return send_file(

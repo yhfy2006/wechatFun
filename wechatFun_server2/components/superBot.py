@@ -13,8 +13,6 @@ class BotStatus(enum.Enum):
 
 
 
-
-
 class SuperBotTread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
