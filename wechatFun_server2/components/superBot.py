@@ -1,4 +1,5 @@
-from wxpy import Bot
+from wxpy import *
+from wxpy.api.messages import *
 import threading
 import uuid
 import enum
@@ -20,12 +21,15 @@ class SuperBotTread(threading.Thread):
         self.status = BotStatus.login_none
         BotPool().shared.addBotThread(self.threadID,self)
 
+
     def run(self):
         print("Starting " + self.name)
-        self.bot = Bot(qr_path = 'static/'+self.threadID+'.png',
-                       login_callback=self.bot_login_callback ,
-                       qr_callback= self.bot_login_qr_callback,
-                       logout_callback= self.bot_logout_callback )
+        self.bot = Bot(qr_path='static/' + self.threadID + '.png',
+                       login_callback=self.bot_login_callback,
+                       qr_callback=self.bot_login_qr_callback,
+                       logout_callback=self.bot_logout_callback)
+        self.register()
+        self.bot.join()
         return
 
 
@@ -47,9 +51,13 @@ class SuperBotTread(threading.Thread):
         print("Logout_success " + self.threadID)
         self.status = BotStatus.login_none
 
+    def register(self):
+        self.bot.registered.append(MessageConfig(
+                bot=self.bot, func=self.listing_on_events, chats=None, msg_types=None,
+                except_self=True, run_async=True, enabled=True
+            ))
 
-    @Bot.register()
-    def register_events(self,msg):
+    def listing_on_events(self,msg):
         if msg.type == 'Friends':
             print(msg)
 
