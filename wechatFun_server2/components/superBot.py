@@ -1,5 +1,6 @@
 from wxpy import *
 from wxpy.api.messages import *
+from .msgDMV import MessageDMV
 import threading
 import uuid
 import enum
@@ -28,7 +29,11 @@ class SuperBotTread(threading.Thread):
                        login_callback=self.bot_login_callback,
                        qr_callback=self.bot_login_qr_callback,
                        logout_callback=self.bot_logout_callback)
+
+        self.bot.enable_puid()
         self.register()
+
+        self.messageDMV = MessageDMV(self.bot.self.puid)
         self.bot.join()
         return
 
@@ -58,17 +63,16 @@ class SuperBotTread(threading.Thread):
             ))
 
     def listing_on_events(self,msg):
-        pass
+        self.messageDMV.processMessage(msg)
 
-    def botRegister(self):
-        func = self.bot.register
-        return func
+    # def botRegister(self):
+    #     func = self.bot.register
+    #     return func
 
 
-    #@self.bot.register()
-    def register_events(self,msg):
-        if msg.type == 'Friends':
-            print(msg)
+    # #@self.bot.register()
+    # def register_events(self,msg):
+    #     self.messageDMV.processMessage(msg)
 
 
 
