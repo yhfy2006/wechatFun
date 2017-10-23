@@ -1,7 +1,7 @@
 import sys
-sys.path.append('..')
-from components.superBot import SuperBotTread,BotPool
+sys.path.append("../")
 from flask import Blueprint,abort,send_file
+from components.superBot import SuperBotTread,BotPool
 import os
 
 botPrint = Blueprint('bot',__name__)

@@ -58,6 +58,15 @@ class SuperBotTread(threading.Thread):
             ))
 
     def listing_on_events(self,msg):
+        pass
+
+    def botRegister(self):
+        func = self.bot.register
+        return func
+
+
+    #@self.bot.register()
+    def register_events(self,msg):
         if msg.type == 'Friends':
             print(msg)
 
