@@ -5,6 +5,8 @@ import threading
 import uuid
 import enum
 import base64
+import leancloud
+from models.modelTerms import *
 
 
 class BotStatus(enum.Enum):
@@ -16,23 +18,25 @@ class BotStatus(enum.Enum):
 
 
 class SuperBotTread(threading.Thread):
-    def __init__(self):
+    def __init__(self,userToken):
         threading.Thread.__init__(self)
         self.threadID = uuid.uuid4().hex
         self.status = BotStatus.login_none
+        self.userToken = userToken
         BotPool().shared.addBotThread(self.threadID,self)
 
 
     def run(self):
         print("Starting " + self.name)
-        self.bot = Bot(qr_path='static/' + self.threadID + '.png',
+        self.bot = Bot(#cache_path = 'loginCache/wxpy.pkl',
+                       qr_path='static/' + self.threadID + '.png',
                        login_callback=self.bot_login_callback,
                        qr_callback=self.bot_login_qr_callback,
                        logout_callback=self.bot_logout_callback)
 
         self.bot.enable_puid()
         self.register()
-
+        self.linkUserWithBot()
         self.messageDMV = MessageDMV(self.bot.self.puid)
         self.bot.join()
         return
@@ -65,18 +69,9 @@ class SuperBotTread(threading.Thread):
     def listing_on_events(self,msg):
         self.messageDMV.processMessage(msg)
 
-    # def botRegister(self):
-    #     func = self.bot.register
-    #     return func
-
-
-    # #@self.bot.register()
-    # def register_events(self,msg):
-    #     self.messageDMV.processMessage(msg)
-
-
-
-
+    def linkUserWithBot(self):
+        user = leancloud.User.become(self.userToken)
+        user.set(UserTerms.userBotPuid,self.bot.self.puid)
 
 
 

@@ -1,0 +1,4 @@
+
+
+class UserTerms:
+    userBotPuid ='botPuid'

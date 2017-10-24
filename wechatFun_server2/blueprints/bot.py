@@ -1,6 +1,6 @@
 import sys
 sys.path.append("../")
-from flask import Blueprint,abort,send_file
+from flask import Blueprint,abort,send_file,request
 from components.superBot import SuperBotTread,BotPool
 import os
 
@@ -9,7 +9,8 @@ botPrint = Blueprint('bot',__name__)
 
 @botPrint.route("/bot/newbot")
 def newBot():
-    bot = SuperBotTread()
+    userToken = request.args.get('userToken')
+    bot = SuperBotTread(userToken)
     bot.start()
     return bot.threadID
 
